@@ -24,6 +24,14 @@
       },
       "component": "hero-area.hero-area",
       "repeatable": false
+    },
+    "aboutMe": {
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

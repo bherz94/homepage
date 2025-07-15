@@ -1,27 +1,16 @@
 <template>
   <div
-    class="h-screen w-full bg-background-main font-ibm-plex-mono text-primary z-0"
+    class="flex flex-col min-h-screen bg-background-main font-ibm-plex-mono text-primary"
   >
-    <Header class="fixed w-full z-50 bg-background-main" />
-    <div class="w-full h-full pt-16 z-20 overflow-y-auto">
-      <RouterView class="max-w-7xl py-10 mx-auto px-6 md:px-16" />
-    </div>
+    <Header class="z-50" />
+    <main class="flex-grow z-20 shadow-md shadow-accent/20">
+      <RouterView class="max-w-7xl mx-auto px-6 md:px-16" />
+    </main>
+    <Footer class="w-full z-10 p-8" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
 import Header from './components/Header.vue';
-import { useLocaleStore } from './stores/locale.store';
-import { watch } from 'vue';
-
-const localeStore = useLocaleStore();
-const { getLocale } = storeToRefs(localeStore);
-
-watch(
-  () => getLocale,
-  (newVal) => {
-    console.log(newVal);
-  }
-);
+import Footer from './components/Footer.vue';
 </script>

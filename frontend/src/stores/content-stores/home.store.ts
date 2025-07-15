@@ -23,7 +23,6 @@ export const useHomeStore = defineStore('homeStore', () => {
       .then(() => requestHelper.get<BaseResponse<HomePage>>(url, params))
       .then((res) => {
         homeContent.value = res.data as HomePage;
-        console.log(homeContent.value);
         return res;
       })
       .catch((err: ResponseError) => {
@@ -34,21 +33,6 @@ export const useHomeStore = defineStore('homeStore', () => {
         homeContentPending.value = false;
       });
   };
-
-  // const fetchTest = async () => {
-  //   const params = homeQuery;
-
-  //   return requestHelper
-  //     .get<BaseResponse<any>>('test', params)
-  //     .then((res) => {
-  //       console.log(res);
-  //       return res;
-  //     })
-  //     .catch((err: ResponseError) => {
-  //       console.log(err);
-  //       Promise.reject(err);
-  //     });
-  // };
 
   return {
     homeContent,

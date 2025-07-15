@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="!loading && content"
-      class="relative flex flex-col md:flex-row gap-2 md:gap-16 items-center justify-between"
+      class="relative flex flex-col md:flex-row items-center justify-between"
     >
       <div class="flex flex-col gap-2 md:gap-6">
         <div class="flex flex-col">
@@ -14,12 +14,8 @@
           <p>{{ content.description }}</p>
         </div>
       </div>
-      <div class="drop-shadow-md drop-shadow-accent/30">
-        <img
-          class="rounded-full overflow-hidden max-w-64 max-h-64"
-          :alt="content.image.alternativeText"
-          :src="fullUrl(content.image)"
-        />
+      <div class="overflow-clip drop-shadow-md drop-shadow-accent/30 max-h-96 md:max-h-[32rem]">
+        <img class="md:h-[50rem] object-cover object-top max-w-none w-80" :src="heroImage.url" :alt="heroImage.alt" />
       </div>
     </div>
     <div
@@ -44,15 +40,21 @@
 
 <script setup lang="ts">
 import type { HeroArea } from '@/models/strapi/hero-area/hero-area';
-import type { PropType } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { computed, type PropType } from 'vue';
 import SkeletonLoader from './shared/SkeletonLoader.vue';
 import { fullUrl } from '@/models/strapi/base-image';
-
-const { t } = useI18n();
 
 const props = defineProps({
   loading: Boolean,
   content: Object as PropType<HeroArea>,
+});
+
+const heroImage = computed(() => {
+  if (!props.content || !props.content.image) return { url: '', alt: '' };
+  var image = {
+    url: fullUrl(props.content.image),
+    alt: props.content.image.alternativeText,
+  };
+  return image;
 });
 </script>

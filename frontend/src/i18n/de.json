@@ -9,12 +9,6 @@
       "dark": "Dunkel"
     }
   },
-  "heroArea": {
-    "preHeadline": "Hi! Ich bin",
-    "headline": "Benedikt Herz",
-    "postHeadline": "Software Engineer",
-    "description": "Ich bin Software Engineer aus Augsburg, Bayern und bin seit 13 Jahren als Softwareentwickler tätig. Ich liebe es eindrucksvolle, moderne und performante Websites / WebApps zu entwickeln."
-  },
   "skills": {
     "headline": "skills"
   }

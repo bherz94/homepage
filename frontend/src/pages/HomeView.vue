@@ -18,6 +18,9 @@
         />
       </div>
     </div>
+    <div section="about-me">
+      <h2 class="mb-8">{{ t('skills.headline') }}</h2>
+    </div>
   </div>
 </template>
 
@@ -27,7 +30,7 @@ import HeroArea from '@/components/HeroArea.vue';
 import { useHomeStore } from '@/stores/content-stores/home.store';
 import { useSkillStore } from '@/stores/skills.store';
 import { storeToRefs } from 'pinia';
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { t, locale } = useI18n();
