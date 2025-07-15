@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-ibm-plex-mono: 'IBM Plex Mono', 'sans-serif';
+
+  /* Color scheme for light theme */
+  --color-background-main: var(--color-neutral-50);
+  --color-primary: var(--color-neutral-600);
+  --color-primary-highlight: var(--color-neutral-800);
+  --color-accent: var(--color-cyan-600);
+  --color-accent-darker: var(--color-cyan-800);
+}
+
+@layer theme {
+  .dark {
+    /* Color scheme for dark theme */
+    --color-background-main: var(--color-neutral-900);
+    --color-primary: var(--color-neutral-400);
+    --color-primary-highlight: var(--color-neutral-300);
+    --color-accent: var(--color-cyan-400);
+    --color-accent-darker: var(--color-cyan-600);
+  }
+}
+
+.code-brackets::before {
+  content: '< ';
+  color: var(--color-accent);
+}
+.code-brackets::after {
+  content: ' />';
+  color: var(--color-accent);
+}
+
+div[section] > h2::before {
+  content: '#';
+  color: var(--color-accent);
+  /* text-3xl class from tailwind */
+  font-size: var(--text-3xl) /* 2.25rem = 30px */;
+  line-height: var(
+    --tw-leading,
+    var(--text-3xl--line-height) /* calc(2.5 / 2.25) ≈ 1.1111 */
+  );
+}
+
+div[section] > h2 {
+  position: relative;
+  color: var(--color-primary-highlight);
+  /* text-4xl class from tailwind */
+  font-size: var(--text-4xl) /* 2.25rem = 36px */;
+  line-height: var(
+    --tw-leading,
+    var(--text-4xl--line-height) /* calc(2.5 / 2.25) ≈ 1.1111 */
+  );
+}
+
+div[section] > h2::after {
+  border-radius: 6px;
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.2rem;
+  background-color: var(--color-accent);
+  width: 6rem;
+  height: 0.2rem;
+  box-shadow: 0 1px 4px var(--color-accent);
+}

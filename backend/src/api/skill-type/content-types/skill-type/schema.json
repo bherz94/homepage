@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "skill_types",
+  "info": {
+    "singularName": "skill-type",
+    "pluralName": "skill-types",
+    "displayName": "SkillType"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "typeName": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true,
+      "unique": true
+    }
+  }
+}

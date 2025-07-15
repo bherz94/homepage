@@ -1,0 +1,21 @@
+{
+  "settings": {
+    "languages": {
+      "de": "German",
+      "en": "English"
+    },
+    "theme": {
+      "light": "Light",
+      "dark": "Dark"
+    }
+  },
+  "heroArea": {
+    "preHeadline": "Hi! My name is,",
+    "headline": "Benedikt Herz",
+    "postHeadline": "Coding Enthusiast",
+    "description": "I'm a Software Engineer from Augsburg, Bavaria and have been coding for 13 years now. I love building impressive, modern and performant Websites / WebApps."
+  },
+  "skills": {
+    "headline": "skills"
+  }
+}
