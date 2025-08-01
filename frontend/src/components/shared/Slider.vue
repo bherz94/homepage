@@ -17,7 +17,7 @@
       ></div>
       <div
         class="hidden md:visible lg:hidden index"
-        :class="[i === currentIndex ? 'bg-gray-600' : 'bg-gray-400']"den kaufen?
+        :class="[i === currentIndex ? 'bg-gray-600' : 'bg-gray-400']"
         v-for="i in props.itemsPerSlide.md"
       ></div>
       <div
