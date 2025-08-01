@@ -1,12 +1,15 @@
 export interface RichtextSection {
   type: RichtextSectionType;
+  level?: number;
   children: SectionChildren[];
 }
 
 export interface SectionChildren {
-  type: SectionChildrenType;
   text: string;
+  type: SectionChildrenType;
+  url?: string;
+  children?: SectionChildren[];
 }
 
 export type RichtextSectionType = 'paragraph' | 'heading' | 'quote';
-export type SectionChildrenType = 'text';
+export type SectionChildrenType = 'text' | 'link';

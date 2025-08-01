@@ -2,38 +2,41 @@
   <div>
     <div
       v-if="!loading && content"
-      class="relative flex flex-col md:flex-row items-center justify-between"
+      class="relative flex flex-col gap-4 md:flex-row items-center justify-between"
     >
       <div class="flex flex-col gap-2 md:gap-6">
         <div class="flex flex-col">
-          <span>{{ content.preTitle }}</span>
-          <h1 class="text-5xl text-primary-highlight">
+          <span class="mb-3">{{ content.preTitle }}</span>
+          <h1>
             {{ content.title }}
           </h1>
-          <span class="code-brackets mb-3">{{ content.subTitle }}</span>
+          <span class="code-brackets mb-5">{{ content.subTitle }}</span>
           <p>{{ content.description }}</p>
         </div>
       </div>
-      <div class="overflow-clip drop-shadow-md drop-shadow-accent/30 max-h-96 md:max-h-[32rem]">
-        <img class="md:h-[50rem] object-cover object-top max-w-none w-80" :src="heroImage.url" :alt="heroImage.alt" />
+      <div
+        class="overflow-clip drop-shadow-md drop-shadow-accent/30 max-h-96 md:max-h-[32rem]"
+      >
+        <img
+          class="md:h-[50rem] object-cover object-top max-w-none w-80"
+          :src="heroImage.url"
+          :alt="heroImage.alt"
+        />
       </div>
     </div>
     <div
       v-else
-      class="relative flex flex-col md:flex-row md:justify-between gap-2 md:gap-16 items-center"
+      class="relative flex flex-col gap-2 md:w-full md:flex-row md:items-center justify-between"
     >
-      <div class="flex flex-col gap-2 md:gap-6">
+      <div class="flex-grow flex flex-col gap-2 md:gap-6">
         <div class="flex flex-col gap-1">
-          <SkeletonLoader width="md" height="md" />
-          <SkeletonLoader width="xl" height="xl" />
-          <SkeletonLoader width="lg" height="md" />
+          <SkeletonLoader class="w-30 h-6 mb-3" />
+          <SkeletonLoader class="w-80 h-12" />
+          <SkeletonLoader class="w-60 h-6 mb-3" />
         </div>
-
-        <SkeletonLoader width="3xl" height="xl" />
+        <SkeletonLoader class="w-full md:w-96 h-24" />
       </div>
-      <div>
-        <SkeletonLoader type="circle" width="xl" height="3xl" />
-      </div>
+      <SkeletonLoader class="self-center w-80 h-96 md:h-[32rem]" />
     </div>
   </div>
 </template>

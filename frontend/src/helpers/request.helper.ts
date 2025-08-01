@@ -5,37 +5,65 @@ export type ResponseError = {
   statusCode: number;
 };
 
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
+
 const baseUrl = import.meta.env.VITE_STRAPI_URL;
 
 export const requestHelper = {
-  get: <T>(url: string, params?: string[] | string, body?: any) =>
-    request<T>('GET')(url, params, body),
-  post: <T>(url: string, params?: string[] | string, body?: any) =>
-    request<T>('POST')(url, params, body),
-  put: <T>(url: string, params?: string[] | string, body?: any) =>
-    request<T>('PUT')(url, params, body),
-  delete: <T>(url: string, params?: string[] | string, body?: any) =>
-    request<T>('DELETE')(url, params, body),
+  get: <T>(
+    url: string,
+    params?: string[] | string,
+    body?: any,
+    external: boolean = false
+  ) => request<T>('GET')(url, params, body, external),
+  post: <T>(
+    url: string,
+    params?: string[] | string,
+    body?: any,
+    external: boolean = false
+  ) => request<T>('POST')(url, params, body, external),
+  put: <T>(
+    url: string,
+    params?: string[] | string,
+    body?: any,
+    external: boolean = false
+  ) => request<T>('PUT')(url, params, body, external),
+  delete: <T>(
+    url: string,
+    params?: string[] | string,
+    body?: any,
+    external: boolean = false
+  ) => request<T>('DELETE')(url, params, body, external),
 };
 
 function request<T>(method: string) {
-  return async (url: string, params?: string[] | string, body?: any) => {
-    const { getLocale } = useLocaleStore();
-    let reqParams: string[] = [`locale=${getLocale}`];
+  return async (
+    url: string,
+    params?: string[] | string,
+    body?: any,
+    external: boolean = false
+  ) => {
+    const requestHeaders: HeadersInit = new Headers();
+    requestHeaders.set('Content-Type', 'application/json');
 
+    let reqParams: string[] = [];
+  
     if (params) {
       Array.isArray(params)
         ? reqParams.push(...params)
         : reqParams.push(params);
     }
 
-    url = `${baseUrl}/${url}?${reqParams.join('&')}`;
+    if (!external) {
+      const { getLocale } = useLocaleStore();
+      reqParams.push(`locale=${getLocale}`);
+      url = `${baseUrl}/${url}?${reqParams.join('&')}`;
+      const apiToken = import.meta.env.VITE_STRAPI_KEY;
 
-    const requestHeaders: HeadersInit = new Headers();
-    requestHeaders.set('Content-Type', 'application/json');
-    const apiToken = import.meta.env.VITE_STRAPI_KEY;
-
-    if (apiToken) requestHeaders.set('Authorization', `Bearer ${apiToken}`);
+      if (apiToken) requestHeaders.set('Authorization', `Bearer ${apiToken}`);
+    } else {
+      url = `${url}?${reqParams.join('&')}`;
+    }
 
     const requestOptions: RequestInit = {
       method,

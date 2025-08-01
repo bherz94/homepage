@@ -27,11 +27,11 @@
     </div>
   </div>
   <div v-else class="flex flex-col gap-5">
-    <SkeletonLoader height="md" width="lg"></SkeletonLoader>
+    <SkeletonLoader class="w-40 h-6"></SkeletonLoader>
     <SkeletonLoader
       type="cardList"
-      height="lg"
-      :dynamicWidth="{ min: 100, max: 200 }"
+      class="h-14"
+      :dynamicWidth="{ min: 130, max: 160 }"
       :count="Utils.getRandomInRange(3, 5)"
     ></SkeletonLoader>
   </div>

@@ -1,11 +1,12 @@
 <template>
   <nav class="shadow-md shadow-accent/20 select-none">
-    <div id="root" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- pl-0 for image correction -->
+    <div id="root" class="mx-auto">
       <div class="flex justify-between h-16 items-center">
         <!-- Left: Name -->
-        <div class="text-xl md:text-2xl font-bold text-primary cursor-pointer">
-          <router-link :to="{ name: 'home', hash: '#root' }">
-            <img class="w-32 h-32" :src="`/img/${logo}`"
+        <div class="h-full cursor-pointer overflow-hidden flex items-center">
+          <router-link :to="{ name: 'home' }">
+            <img class="w-32 h-16" :src="`/img/${logo}`"
           /></router-link>
         </div>
 
@@ -13,12 +14,12 @@
         <div class="hidden md:flex gap-4 items-center">
           <a
             v-for="item in menuItems"
-            :href="`#${item}`"
+            :href="`#${item.section}`"
             class="group hover:text-accent"
             ><span class="text-accent mr-1 group-hover:text-primary">#</span
-            >{{ item }}</a
+            >{{ item.text }}</a
           >
-          <div class="relative">
+          <div class="relative flex items-center">
             <i
               class="material-symbols-outlined cursor-pointer hover:text-accent scale-[80%]"
               @click="() => (settingsOpen = !settingsOpen)"
@@ -87,13 +88,13 @@
                   <div
                     v-for="lang in availableLanguages"
                     href="#"
-                    class="block px-4 py-2 text-sm text-primary hover:text-accent rounded-md"
+                    class="block py-2 text-sm text-primary hover:text-accent rounded-md"
                     @click="selectedLang = lang"
                   >
-                    {{ t(`settings.languages.${lang}`)
-                    }}<i
+                    <i
                       :class="[`ml-3 fi fi-${lang === 'en' ? 'us' : lang}`]"
                     ></i>
+                    {{ t(`settings.languages.${lang}`) }}
                   </div>
                 </div>
               </div>
@@ -147,6 +148,11 @@ import { storeToRefs } from 'pinia';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+type MenuItem = {
+  text: string;
+  section: string;
+};
+
 const { t, locale } = useI18n();
 
 const localeStore = useLocaleStore();
@@ -165,11 +171,16 @@ const toggleButtonRef = ref();
 
 const logo = computed(() =>
   getCurrentTheme.value === 'dark'
-    ? 'BH_simplified_transparent.png'
-    : 'BH_simplified_dark_transparent.png'
+    ? 'BH_simplified_cropped.png'
+    : 'BH_simplified_dark_cropped.png'
 );
 
-const menuItems = ['skills', 'about-me', 'projects', 'contact'];
+const menuItems: MenuItem[] = [
+  { text: t('skills.headline'), section: 'skills' },
+  { text: t('aboutMe.headline'), section: 'about-me' },
+  { text: t('projects.headline'), section: 'projects' },
+  { text: t('contact.headline'), section: 'contact' },
+];
 
 const toggleMenu = (open?: boolean) => {
   isOpen.value = open ?? !isOpen.value;

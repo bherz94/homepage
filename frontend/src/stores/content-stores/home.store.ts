@@ -1,7 +1,6 @@
 import { requestHelper, type ResponseError } from '@/helpers/request.helper';
 import type { BaseResponse } from '@/models/strapi/base-response';
 import type { HomePage } from '@/models/strapi/home-page/home-page';
-import { Utils } from '@/utils/utils';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { homeQuery } from '../queries/home.query';
@@ -19,7 +18,7 @@ export const useHomeStore = defineStore('homeStore', () => {
     const delay = (ms: number) =>
       new Promise((resolve) => setTimeout(resolve, ms));
 
-    return delay(Utils.getRandomInRange(500, 2000))
+    return delay(0)
       .then(() => requestHelper.get<BaseResponse<HomePage>>(url, params))
       .then((res) => {
         homeContent.value = res.data as HomePage;

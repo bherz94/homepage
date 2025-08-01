@@ -11,5 +11,14 @@
   },
   "skills": {
     "headline": "skills"
+  },
+  "aboutMe": {
+    "headline": "about-me"
+  },
+  "projects": {
+    "headline": "projects"
+  },
+  "contact": {
+    "headline": "contact"
   }
 }

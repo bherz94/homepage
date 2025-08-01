@@ -1,29 +1,17 @@
 <!-- SkeletonLoader.vue -->
 <template>
-  <div :class="['w-full', { 'h-full': fullHeight }]">
+  <div class="flex skeleton-container">
     <div
       v-if="type === 'line'"
-      :class="[
-        'animate-pulse bg-neutral-500 rounded-xl',
-        mappedWidthClass,
-        mappedHeightClass,
-      ]"
+      class="animate-pulse bg-neutral-500 rounded-xl"
     ></div>
     <div
       v-else-if="type === 'circle'"
-      :class="[
-        'animate-pulse bg-neutral-500 rounded-full',
-        mappedWidthClass,
-        mappedHeightClass,
-      ]"
+      class="animate-pulse bg-neutral-500 rounded-full"
     ></div>
     <div
       v-else-if="type === 'block'"
-      :class="[
-        'animate-pulse bg-neutral-500 rounded-md',
-        mappedWidthClass,
-        mappedHeightClass,
-      ]"
+      class="animate-pulse bg-neutral-500 rounded-md"
     ></div>
     <div v-else-if="type === 'card'" class="p-4 rounded-lg shadow-md bg-white">
       <div class="animate-pulse bg-neutral-500 rounded-md h-6 w-3/4 mb-3"></div>
@@ -44,11 +32,7 @@
       <div
         v-for="n in count"
         :key="n"
-        :class="[
-          'animate-pulse bg-neutral-500 rounded-xl',
-          mappedWidthClass,
-          mappedHeightClass,
-        ]"
+        class="animate-pulse bg-neutral-500 rounded-xl"
         :style="getRandomWidthStyle()"
       ></div>
     </div>
@@ -62,9 +46,18 @@
 <script setup lang="ts">
 import { Utils } from '@/utils/utils';
 import type { PropType } from 'vue';
-import { computed } from 'vue';
 
-type Sizes = 'xs' | 's' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full';
+type Sizes =
+  | 'xs'
+  | 's'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | '2xl'
+  | '3xl'
+  | '4xl'
+  | '5xl'
+  | 'full';
 type Types =
   | 'line'
   | 'circle'
@@ -135,54 +128,6 @@ const props = defineProps({
   },
 });
 
-// Map predefined sizes to Tailwind CSS width classes
-const mappedWidthClass = computed(() => {
-  switch (props.width) {
-    case 'xs':
-      return 'w-12';
-    case 's':
-      return 'w-16';
-    case 'md':
-      return 'w-24';
-    case 'lg':
-      return 'w-36';
-    case 'xl':
-      return 'w-64';
-    case '2xl':
-      return 'w-72';
-    case '3xl':
-      return 'w-80';
-    case 'full':
-      return 'w-full';
-    default:
-      return 'w-full'; // Fallback
-  }
-});
-
-// Map predefined sizes to Tailwind CSS height classes
-const mappedHeightClass = computed(() => {
-  switch (props.height) {
-    case 'xs':
-      return 'h-4';
-    case 's':
-      return 'h-6';
-    case 'md':
-      return 'h-8';
-    case 'lg':
-      return 'h-12';
-    case 'xl':
-      return 'h-16';
-    case '2xl':
-      return 'h-32';
-    case '3xl':
-      return 'h-64';
-    case 'full':
-      return 'h-full';
-    default:
-      return 'h-6'; // Fallback
-  }
-});
-
 /**
  * Returns a random percentage width as an inline style object.
  * This is used for types like 'cardList' to create visual diversity.
@@ -200,3 +145,10 @@ const getRandomWidthStyle = () => {
   return { width: `${randomWidth}px` };
 };
 </script>
+
+<style lang="css" scoped>
+.skeleton-container > * {
+  flex-grow: 1;
+  height: 100%;
+}
+</style>

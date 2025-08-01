@@ -1,7 +1,6 @@
 import { requestHelper, type ResponseError } from '@/helpers/request.helper';
 import type { BaseResponse } from '@/models/strapi/base-response';
 import type { Skill } from '@/models/strapi/skills/skill';
-import { Utils } from '@/utils/utils';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 
@@ -35,7 +34,7 @@ export const useSkillStore = defineStore('skillStore', () => {
     const delay = (ms: number) =>
       new Promise((resolve) => setTimeout(resolve, ms));
 
-    return delay(Utils.getRandomInRange(500, 2000))
+    return delay(0)
       .then(() => requestHelper.get<BaseResponse<Skill>>(url, params))
       .then((res) => {
         skillsList.value = Array.isArray(res.data) ? res.data : [res.data];
